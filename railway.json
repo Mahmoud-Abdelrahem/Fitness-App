@@ -1,0 +1,13 @@
+{
+    "build": {
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "deploy": {
+      "startCommand": "npm install && npm start",
+      "healthcheckPath": "/",
+      "restartPolicyType": "ON_FAILURE"
+    }
+  }
+  
