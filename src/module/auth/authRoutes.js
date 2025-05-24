@@ -43,3 +43,4 @@ router.get(
 );
 
 export default router;
+console.log("authRoutes loaded ✅");
