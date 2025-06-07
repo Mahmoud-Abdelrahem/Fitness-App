@@ -3,7 +3,6 @@ import Notification from "./notificationModel.js";
 import AppError from "../../utils/AppError.js";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary.js";
 
-// Create a new notification
 export const createNotification = asyncHandler(async (req, res) => {
   const {
     recipient,
@@ -18,7 +17,6 @@ export const createNotification = asyncHandler(async (req, res) => {
 
   let iconUrl = null;
 
-  // رفع الأيقونة إلى Cloudinary إذا تم توفيرها
   if (req.file) {
     const result = await uploadToCloudinary(req.file.buffer, "notifications/icons");
     iconUrl = result.secure_url;
@@ -43,7 +41,6 @@ export const createNotification = asyncHandler(async (req, res) => {
   });
 });
 
-// Get user notifications
 export const getUserNotifications = asyncHandler(async (req, res) => {
   const { status, type, priority, page = 1, limit = 20 } = req.query;
 
@@ -73,7 +70,6 @@ export const getUserNotifications = asyncHandler(async (req, res) => {
   });
 });
 
-// Update notification status
 export const updateNotificationStatus = asyncHandler(async (req, res) => {
   const { notificationId } = req.params;
   const { status } = req.body;
@@ -99,7 +95,6 @@ export const updateNotificationStatus = asyncHandler(async (req, res) => {
   });
 });
 
-// Update multiple notifications
 export const updateMultipleNotifications = asyncHandler(async (req, res) => {
   const { notificationIds, status } = req.body;
 
@@ -117,7 +112,6 @@ export const updateMultipleNotifications = asyncHandler(async (req, res) => {
   });
 });
 
-// Delete notification
 export const deleteNotification = asyncHandler(async (req, res) => {
   const { notificationId } = req.params;
 
@@ -136,7 +130,6 @@ export const deleteNotification = asyncHandler(async (req, res) => {
   });
 });
 
-// Get notification statistics
 export const getNotificationStats = asyncHandler(async (req, res) => {
   const stats = await Notification.aggregate([
     {
@@ -175,7 +168,6 @@ export const getNotificationStats = asyncHandler(async (req, res) => {
   });
 });
 
-// Get plan notifications
 export const getPlanNotifications = asyncHandler(async (req, res) => {
   const { planId, page = 1, limit = 20 } = req.query;
 
@@ -209,7 +201,6 @@ export const getPlanNotifications = asyncHandler(async (req, res) => {
   });
 });
 
-// Update plan notifications status
 export const updatePlanNotifications = asyncHandler(async (req, res) => {
   const { planId } = req.params;
   const { status } = req.body;
@@ -230,7 +221,6 @@ export const updatePlanNotifications = asyncHandler(async (req, res) => {
   });
 });
 
-// Get plan notification statistics
 export const getPlanNotificationStats = asyncHandler(async (req, res) => {
   const stats = await Notification.aggregate([
     {

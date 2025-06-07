@@ -4,7 +4,6 @@ import AppError from "../../utils/AppError.js";
 import streamifier from "streamifier";
 import { v2 as cloudinary } from "cloudinary";
 
-// دالة مساعدة لتحليل النصوص إلى كائنات فقط إذا كانت نصوص
 const tryParseJSON = (data) => {
   if (!data) return undefined;
   if (typeof data === "string") {
@@ -17,7 +16,6 @@ const tryParseJSON = (data) => {
   return data;
 };
 
-// إنشاء تفاصيل تمرين جديد
 export const createExerciseDetails = asyncHandler(async (req, res) => {
   const { exercise, title, description, totalCaloriesBurned } = req.body;
   const steps = tryParseJSON(req.body.steps) || [];
@@ -25,7 +23,6 @@ export const createExerciseDetails = asyncHandler(async (req, res) => {
 
   let videoUrl = null;
 
-  // رفع الفيديو إلى Cloudinary إذا تم توفيره
   if (req.file) {
     const streamUpload = (buffer) => {
       return new Promise((resolve, reject) => {
@@ -50,13 +47,11 @@ export const createExerciseDetails = asyncHandler(async (req, res) => {
     videoUrl = result.secure_url;
   }
 
-  // التحقق من وجود تفاصيل مسبقة لنفس التمرين
   const existingDetails = await ExerciseDetails.findOne({ exercise });
   if (existingDetails) {
     throw new AppError("Details for this exercise already exist", 400);
   }
 
-  // إنشاء تفاصيل التمرين مع الحقول المطلوبة
   const exerciseDetails = await ExerciseDetails.create({
     exercise,
     title,
@@ -73,11 +68,9 @@ export const createExerciseDetails = asyncHandler(async (req, res) => {
   });
 });
 
-// الحصول على تفاصيل تمرين معين
 export const getExerciseDetails = asyncHandler(async (req, res) => {
   const { exerciseId } = req.params;
 
-  // البحث عن تفاصيل التمرين باستخدام معرف التمرين
   const exerciseDetails = await ExerciseDetails.findOne({ exercise: exerciseId });
 
   if (!exerciseDetails) {
@@ -90,7 +83,6 @@ export const getExerciseDetails = asyncHandler(async (req, res) => {
   });
 });
 
-// تحديث تفاصيل تمرين
 export const updateExerciseDetails = asyncHandler(async (req, res) => {
   const { exerciseId } = req.params;
   const { title, description, totalCaloriesBurned } = req.body;
@@ -99,7 +91,6 @@ export const updateExerciseDetails = asyncHandler(async (req, res) => {
 
   let videoUrl = null;
 
-  // رفع فيديو جديد إلى Cloudinary إذا تم توفيره
   if (req.file) {
     const streamUpload = (buffer) => {
       return new Promise((resolve, reject) => {
@@ -134,7 +125,6 @@ export const updateExerciseDetails = asyncHandler(async (req, res) => {
   if (customRepetitions !== undefined) updateData.customRepetitions = customRepetitions;
   if (videoUrl) updateData.video = videoUrl;
 
-  // تحديث تفاصيل التمرين باستخدام معرف التمرين
   const exerciseDetails = await ExerciseDetails.findOneAndUpdate(
     { exercise: exerciseId },
     updateData,
@@ -151,11 +141,9 @@ export const updateExerciseDetails = asyncHandler(async (req, res) => {
   });
 });
 
-// حذف تفاصيل تمرين
 export const deleteExerciseDetails = asyncHandler(async (req, res) => {
   const { exerciseId } = req.params;
 
-  // حذف تفاصيل التمرين باستخدام معرف التمرين
   const exerciseDetails = await ExerciseDetails.findOneAndDelete({ exercise: exerciseId });
 
   if (!exerciseDetails) {

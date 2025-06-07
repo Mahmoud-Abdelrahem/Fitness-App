@@ -11,7 +11,7 @@ export const createUserSchema = Joi.object({
   dateOfBirth: Joi.date().required(),
   weight: Joi.number().required(),
   height: Joi.number().required(),
-  termsAccepted: Joi.boolean().required().valid(true), // Ensure terms are accepted
+  termsAccepted: Joi.boolean().required().valid(true), 
 });
 
 export const loginSchema = Joi.object({

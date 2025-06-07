@@ -5,7 +5,6 @@ import {validate} from "../../middleware/validate.js";
 import upload from "../../middleware/upload.js";
 import Joi from "joi";
 
-// Middleware لتحويل JSON strings إلى مصفوفات
 const parseJsonFields = (req, res, next) => {
     try {
         if (req.body.upcomingWorkouts && typeof req.body.upcomingWorkouts === "string") {
@@ -32,7 +31,6 @@ const parseJsonFields = (req, res, next) => {
 
 const router = express.Router();
 
-// Validation schemas
 const createWorkoutTrackerSchema = Joi.object({
     upcomingWorkouts: Joi.array().items(
         Joi.object({
@@ -75,9 +73,6 @@ const addCompletedWorkoutSchema = Joi.object({
     caloriesBurned: Joi.number().required(),
 });
 
-// Routes
-
-// إنشاء سجل جديد للمستخدم
 router.post(
     "/",
     auth.protect,
@@ -87,19 +82,16 @@ router.post(
     workoutTrackerController.createWorkoutTracker
 );
 
-// الحصول على بيانات التمارين للمستخدم
 router.get("/", auth.protect, workoutTrackerController.getWorkoutTracker);
 
-// إضافة تمرين جديد إلى التدريبات القادمة
 router.post(
     "/upcoming",
     auth.protect,
-    upload.single("image"), // Middleware لتحميل الصورة
+    upload.single("image"), 
     validate(addUpcomingWorkoutSchema),
     workoutTrackerController.addUpcomingWorkout
 );
 
-// تحديث تقدم أسبوعي
 router.patch(
     "/progress",
     auth.protect,
@@ -107,16 +99,14 @@ router.patch(
     workoutTrackerController.updateWeeklyProgress
 );
 
-// إضافة تمرين مكتمل
 router.post(
     "/completed",
     auth.protect,
-    upload.single("image"), // Middleware لتحميل الصورة
+    upload.single("image"), 
     validate(addCompletedWorkoutSchema),
     workoutTrackerController.addCompletedWorkout
 );
 
-// حذف تمرين من التدريبات القادمة 
 router.delete(
     "/upcoming/:workoutId",
     auth.protect,

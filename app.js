@@ -11,12 +11,17 @@ import exerciseDetailsRoutes from "./src/module/exercisesDetails/exercisesDetail
 import userProfileRoutes from "./src/module/userModule/userProfileRoutes.js";
 import authRoutes from "./src/module/auth/authRoutes.js";
 import notificationRoutes from "./src/module/notification/notificationRoutes.js";
+import categoryRoutes from "./src/module/category/categoryRoutes.js";
+import productRoutes from "./src/module/product/productRoutes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import session from "express-session";
 import passport from "passport";
 import "./src/module/passport/passport.js";
+import paymentRoutes from "./src/module/payment/paymentRoutes.js";
+
+
 
 
 // Load environment variables
@@ -28,7 +33,7 @@ const app = express();
 //Allow Cors
 app.use(
   cors({
-    origin: [`${process.env.localUrl}`, `${process.env.productionUrl}`], // <-- Your frontend origin
+    origin: [`${process.env.localUrl}`, `${process.env.productionUrl}`], 
     credentials: true,
   })
 );
@@ -60,7 +65,10 @@ app.get("/api/check-auth", (req, res) => {
     res.json({ isAuthenticated: false });
   }
 });
+
+
 app.use("/api/auth", authRoutes);
+app.use('/api/payment', paymentRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/activity",activityRoutes);
 app.use("/api/exercise",exerciseRoutes);
@@ -68,7 +76,8 @@ app.use("/api/exerciseDetails",exerciseDetailsRoutes);
 app.use("/api/workoutTracker",workoutRoutes);
 app.use("/api/user", userProfileRoutes);
 app.use("/api/notifications", notificationRoutes);
-
+app.use("/api/category", categoryRoutes);
+app.use("/api/product", productRoutes);
 // Home Route
 app.get("/", (req, res) => {
   res.send("Hello Fitness-App!!");

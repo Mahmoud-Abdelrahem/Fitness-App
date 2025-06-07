@@ -3,7 +3,6 @@ import WorkoutTracker from "./workoutTrackerModel.js";
 import AppError from "../../utils/AppError.js";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary.js";
 
-// إنشاء سجل جديد للمستخدم
 export const createWorkoutTracker = asyncHandler(async (req, res) => {
     let { upcomingWorkouts, availableWorkouts, weeklyProgress } = req.body;
 
@@ -18,7 +17,6 @@ export const createWorkoutTracker = asyncHandler(async (req, res) => {
         imageUrl = await uploadToCloudinary(req.file.buffer, "workoutTracker/images");
     }
 
-    // لو الحقول مش strings متعملش JSON.parse عليها
     if (typeof upcomingWorkouts === "string") {
         upcomingWorkouts = JSON.parse(upcomingWorkouts);
     }
@@ -31,7 +29,6 @@ export const createWorkoutTracker = asyncHandler(async (req, res) => {
         weeklyProgress = JSON.parse(weeklyProgress);
     }
 
-    // تعيين الصورة للتمارين المتاحة (لو فيها صورة)
     if (Array.isArray(availableWorkouts)) {
         availableWorkouts = availableWorkouts.map(workout => ({
             ...workout,
@@ -52,7 +49,6 @@ export const createWorkoutTracker = asyncHandler(async (req, res) => {
     });
 });
 
-// الحصول على بيانات التمارين للمستخدم
 export const getWorkoutTracker = asyncHandler(async (req, res) => {
     const tracker = await WorkoutTracker.findOne({ user: req.user._id });
 
@@ -66,13 +62,11 @@ export const getWorkoutTracker = asyncHandler(async (req, res) => {
     });
 });
 
-// إضافة تمرين جديد إلى التدريبات القادمة
 export const addUpcomingWorkout = asyncHandler(async (req, res) => {
     const { title, date, notificationEnabled } = req.body;
 
     let imageUrl = null;
 
-    // رفع الصورة إلى Cloudinary إذا تم توفيرها
     if (req.file) {
         imageUrl = await uploadToCloudinary(req.file.buffer, "workoutTracker/upcoming");
     }
@@ -103,29 +97,23 @@ export const addUpcomingWorkout = asyncHandler(async (req, res) => {
     });
 });
 
-// تحديث تقدم أسبوعي
 export const updateWeeklyProgress = asyncHandler(async (req, res) => {
     const { day, progress } = req.body;
 
-    // حاول تجد السجل
     const tracker = await WorkoutTracker.findOne({ user: req.user._id });
 
     if (!tracker) {
         throw new AppError("Workout tracker not found for this user", 404);
     }
 
-    // ابحث عن اليوم داخل weeklyProgress
     const dayIndex = tracker.weeklyProgress.findIndex(wp => wp.day === day);
 
     if (dayIndex !== -1) {
-        // اليوم موجود، حدث التقدم
         tracker.weeklyProgress[dayIndex].progress = progress;
     } else {
-        // اليوم مش موجود، أضف اليوم مع التقدم
         tracker.weeklyProgress.push({ day, progress });
     }
 
-    // احفظ التغييرات
     await tracker.save();
 
     res.status(200).json({
@@ -135,13 +123,11 @@ export const updateWeeklyProgress = asyncHandler(async (req, res) => {
 });
 
 
-// إضافة تمرين مكتمل
 export const addCompletedWorkout = asyncHandler(async (req, res) => {
     const { title, date, duration, caloriesBurned } = req.body;
 
     let imageUrl = null;
 
-    // رفع الصورة إلى Cloudinary إذا تم توفيرها
     if (req.file) {
         imageUrl = await uploadToCloudinary(req.file.buffer, "workoutTracker/completed");
     }
@@ -172,7 +158,6 @@ export const addCompletedWorkout = asyncHandler(async (req, res) => {
     });
 });
 
-// حذف تمرين من التدريبات القادمة
 export const deleteUpcomingWorkout = asyncHandler(async (req, res) => {
     const { workoutId } = req.params;
 

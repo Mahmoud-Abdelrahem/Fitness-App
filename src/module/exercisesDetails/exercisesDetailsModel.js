@@ -16,7 +16,7 @@ const exerciseDetailsSchema = new mongoose.Schema(
             required: true,
         },
         totalCaloriesBurned: {
-            type: Number, // إجمالي السعرات الحرارية المحروقة
+            type: Number, 
             required: true,
         },
         steps: [
@@ -26,15 +26,15 @@ const exerciseDetailsSchema = new mongoose.Schema(
                     required: true,
                 },
                 title: {
-                    type: String, // عنوان الخطوة
+                    type: String, 
                     required: true,
                 },
                 instruction: {
-                    type: String, // وصف الخطوة
+                    type: String, 
                     required: true,
                 },
                 caloriesBurned: {
-                    type: Number, // السعرات الحرارية المحروقة لكل خطوة
+                    type: Number, 
                     required: true,
                 },
             },
@@ -52,12 +52,12 @@ const exerciseDetailsSchema = new mongoose.Schema(
             },
         ],
         video: {
-            type: String, // رابط الفيديو
+            type: String, 
             required: false,
         },
     },
     {
-        timestamps: true, // يضيف createdAt و updatedAt تلقائيًا
+        timestamps: true, 
     }
 );
 

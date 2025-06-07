@@ -72,7 +72,7 @@ export const login = asyncHandler(async (req, res, next) => {
   res.cookie("access_token", token, {
     path: "/",
     sameSite: "None",
-    secure: process.env.NODE_ENV === "production" ? true : false, // Use secure only in production
+    secure: process.env.NODE_ENV === "production" ? true : false, 
     httpOnly: true,
   });
 
@@ -160,7 +160,7 @@ export const googleCallback = asyncHandler(async (req, res) => {
   res.cookie("access_token", token, {
     path: "/",
     sameSite: "None",
-    secure: process.env.NODE_ENV === "production" ? true : false, // Use secure only in production
+    secure: process.env.NODE_ENV === "production" ? true : false, 
     httpOnly: true,
   });
 

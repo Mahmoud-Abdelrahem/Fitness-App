@@ -13,12 +13,12 @@ const activityTrackerSchema = new mongoose.Schema(
             waterIntake: {
                 type: Number,
                 required: true,
-                default: 2, // Default daily water intake in liters
+                default: 2, 
             },
             footSteps: {
                 type: Number,
                 required: true,
-                default: 10000, // Default daily foot steps target
+                default: 10000, 
             },
         },
         activityProgress: [
@@ -60,7 +60,7 @@ const activityTrackerSchema = new mongoose.Schema(
         ],
     },
     {
-        timestamps: true, // Automatically adds createdAt and updatedAt
+        timestamps: true, 
     }
 );
 

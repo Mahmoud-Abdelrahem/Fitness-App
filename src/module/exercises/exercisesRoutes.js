@@ -7,7 +7,6 @@ import Joi from "joi";
 
 const router = express.Router();
 
-// Validation schemas
 const createExerciseSchema = Joi.object({
     workout: Joi.string().required(),
     title: Joi.string().required(),
@@ -37,9 +36,7 @@ const updateExerciseSchema = Joi.object({
     caloriesBurned: Joi.number().optional(),
 });
 
-// Routes
 
-// إنشاء تمرين جديد
 router.post(
     "/",
     auth.protect,
@@ -49,10 +46,8 @@ router.post(
     exercisesController.createExercise
 );
 
-// الحصول على جميع التمارين الخاصة بتمرين معين
 router.get("/:workoutId", auth.protect, exercisesController.getExercisesByWorkout);
 
-// تحديث تمرين
 router.patch(
     "/:exerciseId",
     auth.protect,
@@ -62,7 +57,6 @@ router.patch(
     exercisesController.updateExercise
 );
 
-// حذف تمرين
 router.delete("/:exerciseId", auth.protect, exercisesController.deleteExercise);
 
 export default router;

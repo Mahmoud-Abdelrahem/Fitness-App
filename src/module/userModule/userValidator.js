@@ -15,15 +15,15 @@ export const userValidationSchema = Joi.object({
 });
 
 export const userUpdateValidationSchema = Joi.object({
-  name: Joi.string().trim().min(3).optional(), // يمكن تحديث الاسم
-  email: Joi.string().email().trim().optional(), // يمكن تحديث البريد الإلكتروني
-  password: Joi.string().min(8).optional(), // يمكن تحديث كلمة المرور
-  phoneNumber: Joi.string().trim().optional(), // يمكن تحديث رقم الهاتف
+  name: Joi.string().trim().min(3).optional(), 
+  email: Joi.string().email().trim().optional(), 
+  password: Joi.string().min(8).optional(), 
+  phoneNumber: Joi.string().trim().optional(), 
   gender: Joi.string()
     .valid("Male", "Female", "Other")
-    .optional(), // يمكن تحديث النوع
-  dateOfBirth: Joi.date().optional(), // يمكن تحديث تاريخ الميلاد
-  weight: Joi.number().optional(), // يمكن تحديث الوزن
-  height: Joi.number().optional(), // يمكن تحديث الطول
-  termsAccepted: Joi.boolean().valid(true).forbidden(), // لا يمكن تحديث قبول الشروط
+    .optional(), 
+  dateOfBirth: Joi.date().optional(), 
+  weight: Joi.number().optional(), 
+  height: Joi.number().optional(), 
+  termsAccepted: Joi.boolean().valid(true).forbidden(),
 });

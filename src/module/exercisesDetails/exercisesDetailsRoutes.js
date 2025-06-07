@@ -56,9 +56,7 @@ const updateExerciseDetailsSchema = Joi.object({
 });
 
 
-// Routes
 
-// إنشاء تفاصيل تمرين جديد
 router.post(
   "/",
   auth.protect,
@@ -69,20 +67,17 @@ router.post(
 );
 
 
-// الحصول على تفاصيل تمرين معين
 router.get("/:exerciseId", auth.protect, exercisesDetailsController.getExerciseDetails);
 
-// تحديث تفاصيل تمرين
 router.patch(
   "/:exerciseId",
   auth.protect,
-  upload.single("video"), // Middleware لتحميل الفيديو
+  upload.single("video"), 
   parseJsonFields(["steps", "customRepetitions"]),
   validate(updateExerciseDetailsSchema),
   exercisesDetailsController.updateExerciseDetails
 );
 
-// حذف تفاصيل تمرين
 router.delete("/:exerciseId", auth.protect, exercisesDetailsController.deleteExerciseDetails);
 
 export default router;

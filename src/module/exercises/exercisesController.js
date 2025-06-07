@@ -3,11 +3,9 @@ import Exercise from "./exercisesModel.js";
 import AppError from "../../utils/AppError.js";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary.js";
 
-// إنشاء تمرين جديد
 export const createExercise = asyncHandler(async (req, res) => {
     let { workout, title, duration, repetitions, equipment, difficulty, caloriesBurned } = req.body;
 
-    // parse equipment
     if (typeof equipment === "string") {
         try {
             equipment = JSON.parse(equipment);
@@ -18,7 +16,6 @@ export const createExercise = asyncHandler(async (req, res) => {
 
     let imageUrl = null;
 
-    // رفع صورة التمرين إلى Cloudinary من buffer
     if (req.file) {
         imageUrl = await uploadToCloudinary(req.file.buffer, "exercises/images");
     }
@@ -40,7 +37,6 @@ export const createExercise = asyncHandler(async (req, res) => {
     });
 });
 
-// الحصول على جميع التمارين الخاصة بتمرين معين
 export const getExercisesByWorkout = asyncHandler(async (req, res) => {
     const { workoutId } = req.params;
 
@@ -56,7 +52,6 @@ export const getExercisesByWorkout = asyncHandler(async (req, res) => {
     });
 });
 
-// تحديث تمرين
 export const updateExercise = asyncHandler(async (req, res) => {
     const { exerciseId } = req.params;
     let { title, duration, repetitions, equipment, difficulty, caloriesBurned } = req.body;
@@ -99,7 +94,6 @@ export const updateExercise = asyncHandler(async (req, res) => {
     });
 });
 
-// حذف تمرين
 export const deleteExercise = asyncHandler(async (req, res) => {
     const { exerciseId } = req.params;
 

@@ -6,7 +6,6 @@ import Joi from "joi";
 
 const router = express.Router();
 
-// Validation schemas
 const createActivityTrackerSchema = Joi.object({
     dailyTarget: Joi.object({
         waterIntake: Joi.number().required(),
@@ -29,9 +28,7 @@ const addLatestActivitySchema = Joi.object({
     description: Joi.string().required(),
 });
 
-// Routes
 
-// إنشاء سجل جديد للنشاط
 router.post(
     "/",
     auth.protect,
@@ -39,10 +36,8 @@ router.post(
     activityTrackerController.createActivityTracker
 );
 
-// الحصول على بيانات النشاط للمستخدم
 router.get("/", auth.protect, activityTrackerController.getActivityTracker);
 
-// تحديث الأهداف اليومية
 router.patch(
     "/daily-target",
     auth.protect,
@@ -50,7 +45,6 @@ router.patch(
     activityTrackerController.updateDailyTarget
 );
 
-// إضافة تقدم يومي جديد
 router.post(
     "/progress",
     auth.protect,
@@ -58,7 +52,6 @@ router.post(
     activityTrackerController.addDailyProgress
 );
 
-// إضافة نشاط جديد إلى قائمة الأنشطة الأخيرة
 router.post(
     "/latest-activity",
     auth.protect,
@@ -66,7 +59,6 @@ router.post(
     activityTrackerController.addLatestActivity
 );
 
-// حذف سجل النشاط للمستخدم
 router.delete("/", auth.protect, activityTrackerController.deleteActivityTracker);
 
 export default router;

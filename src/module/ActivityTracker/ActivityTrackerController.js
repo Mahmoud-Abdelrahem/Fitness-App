@@ -2,7 +2,6 @@ import asyncHandler from "express-async-handler";
 import ActivityTracker from "./ActivityTrackerModel.js";
 import AppError from "../../utils/AppError.js";
 
-// إنشاء سجل جديد للمستخدم
 export const createActivityTracker = asyncHandler(async (req, res) => {
     const { dailyTarget } = req.body;
 
@@ -22,7 +21,6 @@ export const createActivityTracker = asyncHandler(async (req, res) => {
     });
 });
 
-// الحصول على بيانات النشاط للمستخدم
 export const getActivityTracker = asyncHandler(async (req, res) => {
     const tracker = await ActivityTracker.findOne({ user: req.user._id });
 
@@ -36,7 +34,6 @@ export const getActivityTracker = asyncHandler(async (req, res) => {
     });
 });
 
-// تحديث الأهداف اليومية
 export const updateDailyTarget = asyncHandler(async (req, res) => {
     const { waterIntake, footSteps } = req.body;
 
@@ -61,7 +58,6 @@ export const updateDailyTarget = asyncHandler(async (req, res) => {
     });
 });
 
-// إضافة تقدم يومي جديد
 export const addDailyProgress = asyncHandler(async (req, res) => {
     const { waterIntake, footSteps } = req.body;
 
@@ -89,7 +85,6 @@ export const addDailyProgress = asyncHandler(async (req, res) => {
     });
 });
 
-// إضافة نشاط جديد إلى قائمة الأنشطة الأخيرة
 export const addLatestActivity = asyncHandler(async (req, res) => {
     const { activityType, description } = req.body;
 
@@ -117,7 +112,6 @@ export const addLatestActivity = asyncHandler(async (req, res) => {
     });
 });
 
-// حذف سجل النشاط للمستخدم
 export const deleteActivityTracker = asyncHandler(async (req, res) => {
     const tracker = await ActivityTracker.findOneAndDelete({ user: req.user._id });
 

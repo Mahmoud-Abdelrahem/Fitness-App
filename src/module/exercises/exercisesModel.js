@@ -12,15 +12,15 @@ const exerciseSchema = new mongoose.Schema(
             required: true,
         },
         duration: {
-            type: Number, // مدة التمرين بالدقائق
+            type: Number, 
             required: true,
         },
         repetitions: {
-            type: Number, // عدد التكرارات
+            type: Number, 
             required: false,
         },
         image: {
-            type: String, // رابط صورة التمرين
+            type: String, 
             required: false,
         },
         equipment: [
@@ -30,7 +30,7 @@ const exerciseSchema = new mongoose.Schema(
                     required: true,
                 },
                 image: {
-                    type: String, // رابط صورة الأداة
+                    type: String, 
                     required: false,
                 },
             },
@@ -41,12 +41,12 @@ const exerciseSchema = new mongoose.Schema(
             required: true,
         },
         caloriesBurned: {
-            type: Number, // السعرات الحرارية المحروقة
+            type: Number, 
             required: true,
         },
     },
     {
-        timestamps: true, // يضيف createdAt و updatedAt تلقائيًا
+        timestamps: true, 
     }
 );
 

@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// serialize / deserialize
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser(async (id, done) => {
     try {
@@ -16,7 +15,6 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
-// Google strategy
 passport.use(
     new GoogleStrategy(
         {
@@ -32,13 +30,10 @@ passport.use(
                         googleId: profile.id,
                         name: profile.displayName,
                         email: profile.emails[0].value,
-                        phoneNumber: "N/A", // Default value for phoneNumber
-                        gender: "Other", // Default value for gender
-                        dateOfBirth: new Date("2000-01-01"), // Default value for dateOfBirth
-                        weight: 0, // Default value for weight
-                        height: 0, // Default value for height
-                        password: "google-auth", // Placeholder password
-                        termsAccepted: true, // Default value
+                        phoneNumber: "N/A",
+                        gender: "Other", dateOfBirth: new Date("2000-01-01"),
+                        weight: 0, height: 0, password: "google-auth",
+                        termsAccepted: true,
                     });
                 }
                 return done(null, user);

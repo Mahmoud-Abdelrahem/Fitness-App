@@ -37,7 +37,6 @@ const updateMultipleSchema = Joi.object({
   status: Joi.string().valid("read", "archived").required(),
 });
 
-// Routes
 router.post(
   "/",
   auth.protect,
@@ -70,7 +69,6 @@ router.delete(
   notificationController.deleteNotification
 );
 
-// Plan notification routes
 router.get("/plan", auth.protect, notificationController.getPlanNotifications);
 
 router.patch(

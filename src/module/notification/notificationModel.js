@@ -20,7 +20,7 @@ const notificationSchema = new mongoose.Schema(
       required: true,
     },
     icon: {
-      type: String, // URL أو اسم الأيقونة
+      type: String, 
       required: false,
     },
     priority: {
@@ -44,7 +44,7 @@ const notificationSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // يضيف createdAt و updatedAt تلقائيًا
+    timestamps: true, 
   }
 );
 
