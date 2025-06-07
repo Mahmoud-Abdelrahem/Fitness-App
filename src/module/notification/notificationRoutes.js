@@ -1,7 +1,7 @@
 import express from "express";
 import * as notificationController from "./notificationController.js";
 import auth from "../../middleware/authentication.js";
-import validate from "../../middleware/validate.js";
+import {validate} from "../../middleware/validate.js";
 import upload from "../../middleware/upload.js";
 import Joi from "joi";
 

@@ -5,6 +5,9 @@ import express from "express";
 import errorHandler from "./src/middleware/errorHandler.js";
 import userRoutes from "./src/module/userModule/userRoutes.js";
 import activityRoutes from "./src/module/ActivityTracker/ActivityTrackerRoutes.js";
+import workoutRoutes from "./src/module/workoutTracker/workoutTrackerRoutes.js";
+import exerciseRoutes from "./src/module/exercises/exercisesRoutes.js";
+import exerciseDetailsRoutes from "./src/module/exercisesDetails/exercisesDetailsRoutes.js";
 import userProfileRoutes from "./src/module/userModule/userProfileRoutes.js";
 import authRoutes from "./src/module/auth/authRoutes.js";
 import notificationRoutes from "./src/module/notification/notificationRoutes.js";
@@ -60,6 +63,9 @@ app.get("/api/check-auth", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/activity",activityRoutes);
+app.use("/api/exercise",exerciseRoutes);
+app.use("/api/exerciseDetails",exerciseDetailsRoutes);
+app.use("/api/workoutTracker",workoutRoutes);
 app.use("/api/user", userProfileRoutes);
 app.use("/api/notifications", notificationRoutes);
 

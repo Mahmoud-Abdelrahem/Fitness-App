@@ -4,11 +4,13 @@ import multer from "multer";
 // استخدم الذاكرة بدل التخزين على الهارد
 const storage = multer.memoryStorage();
 
+// تعديل الفلتر لدعم الصور والفيديوهات
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype.startsWith("image")) {
+    const allowedMimeTypes = ["image/jpeg", "image/png", "video/mp4", "video/mpeg"];
+    if (allowedMimeTypes.includes(file.mimetype)) {
         cb(null, true);
     } else {
-        cb(new Error("Only image files are allowed!"), false);
+        cb(new Error("Only image and video files are allowed!"), false);
     }
 };
 

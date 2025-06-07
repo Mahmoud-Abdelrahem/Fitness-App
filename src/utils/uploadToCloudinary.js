@@ -6,10 +6,11 @@ export const uploadToCloudinary = (buffer, folder = "notifications/icons") => {
             { folder },
             (error, result) => {
                 if (error) return reject(error);
-                resolve(result);
+                resolve(result.secure_url);  
             }
         );
 
         stream.end(buffer);
     });
 };
+

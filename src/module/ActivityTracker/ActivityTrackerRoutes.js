@@ -1,7 +1,7 @@
 import express from "express";
 import * as activityTrackerController from "./ActivityTrackerController.js";
 import auth from "../../middleware/authentication.js";
-import validate from "../../middleware/validate.js";
+import {validate} from "../../middleware/validate.js";
 import Joi from "joi";
 
 const router = express.Router();
