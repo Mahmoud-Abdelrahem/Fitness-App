@@ -13,6 +13,8 @@ import authRoutes from "./src/module/auth/authRoutes.js";
 import notificationRoutes from "./src/module/notification/notificationRoutes.js";
 import categoryRoutes from "./src/module/category/categoryRoutes.js";
 import productRoutes from "./src/module/product/productRoutes.js";
+import mealDetailsRoutes from "./src/module/mealDetails/mealDetailsRoutes.js";
+import mealRoutes from "./src/module/meal/mealRoutes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
@@ -78,6 +80,8 @@ app.use("/api/user", userProfileRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
+app.use("/api/meal", mealRoutes);
+app.use("/api/mealDetails", mealDetailsRoutes);
 // Home Route
 app.get("/", (req, res) => {
   res.send("Hello Fitness-App!!");
