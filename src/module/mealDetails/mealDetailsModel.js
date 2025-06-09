@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 
 const nutritionSchema = new mongoose.Schema({
-    calories: { type: Number, required: true }, // السعرات الحرارية
-    fats: { type: Number, required: true }, // الدهون
-    proteins: { type: Number, required: true }, // البروتينات
+    calories: { type: Number, required: true },
+    fats: { type: Number, required: true }, 
+    proteins: { type: Number, required: true },
 });
 const ingredientSchema = new mongoose.Schema({
     name: { type: String, required: true }, 

@@ -1,13 +1,11 @@
 import Joi from "joi";
 
-// فاليديشن للفئات الرئيسية
 export const mainCategorySchema = Joi.object({
     name: Joi.string().required().messages({
         "string.empty": "The name field is required.",
     }),
 });
 
-// فاليديشن للفئات الداخلية
 export const subCategorySchema = Joi.object({
     name: Joi.string().required().messages({
         "string.empty": "The name field is required.",
@@ -15,7 +13,6 @@ export const subCategorySchema = Joi.object({
     description: Joi.string().optional(),
 });
 
-// فاليديشن للوجبات
 export const mealSchema = Joi.object({
     name: Joi.string().required().messages({
         "string.empty": "The name field is required.",

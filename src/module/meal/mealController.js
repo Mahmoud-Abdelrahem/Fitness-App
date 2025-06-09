@@ -33,7 +33,6 @@ export const getAllMeals = asyncHandler(async (req, res) => {
     });
 });
 
-// الحصول على وجبة معينة
 export const getMealById = asyncHandler(async (req, res) => {
     const { mealId } = req.params;
 
