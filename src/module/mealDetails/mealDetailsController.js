@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import MainCategory from "./mealdetailsModel.js";
+import MainCategory from "./mealDetailsModel.js";
 import AppError from "../../utils/AppError.js";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary.js";
 
