@@ -3,14 +3,11 @@ import Workout from "./workoutModel.js";
 import AppError from "../../utils/AppError.js";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary.js";
 
-/** ==========================
- *  إنشاء تمرين جديد
- * ========================== */
+
 export const createWorkout = asyncHandler(async (req, res) => {
     const { title, exercises, duration } = req.body;
     let imageUrl = null;
 
-    // رفع الصورة إلى Cloudinary
     if (req.file) {
         try {
             imageUrl = await uploadToCloudinary(req.file.buffer, "workouts/images");
@@ -23,17 +20,13 @@ export const createWorkout = asyncHandler(async (req, res) => {
     res.status(201).json({ success: true, data: workout });
 });
 
-/** ==========================
- *  الحصول على جميع التمارين
- * ========================== */
+
 export const getAllWorkouts = asyncHandler(async (req, res) => {
     const workouts = await Workout.find();
     res.status(200).json({ success: true, data: workouts });
 });
 
-/** ==========================
- *  الحصول على تمرين معين
- * ========================== */
+
 export const getWorkoutById = asyncHandler(async (req, res) => {
     const { workoutId } = req.params;
     const workout = await Workout.findById(workoutId);
@@ -41,15 +34,12 @@ export const getWorkoutById = asyncHandler(async (req, res) => {
     res.status(200).json({ success: true, data: workout });
 });
 
-/** ==========================
- *  تحديث تمرين
- * ========================== */
+
 export const updateWorkout = asyncHandler(async (req, res) => {
     const { workoutId } = req.params;
     const { title, exercises, duration } = req.body;
     let imageUrl = null;
 
-    // رفع الصورة إلى Cloudinary إذا تم توفيرها
     if (req.file) {
         try {
             imageUrl = await uploadToCloudinary(req.file.buffer, "workouts/images");
@@ -71,9 +61,7 @@ export const updateWorkout = asyncHandler(async (req, res) => {
     res.status(200).json({ success: true, data: workout });
 });
 
-/** ==========================
- *  حذف تمرين
- * ========================== */
+
 export const deleteWorkout = asyncHandler(async (req, res) => {
     const { workoutId } = req.params;
 

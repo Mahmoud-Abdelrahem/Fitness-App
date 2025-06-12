@@ -1,21 +1,21 @@
 import asyncHandler from "express-async-handler";
 import Exercise from "./exercisesModel.js";
+import Workout from "../workout/workoutModel.js"; 
 import AppError from "../../utils/AppError.js";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary.js";
 
 export const createExercise = asyncHandler(async (req, res) => {
-    let { workout, title, duration, repetitions, equipment, difficulty, caloriesBurned } = req.body;
+    const { workout, title, duration, repetitions, equipment, difficulty, caloriesBurned } = req.body;
 
-    if (typeof equipment === "string") {
-        try {
-            equipment = JSON.parse(equipment);
-        } catch {
-            throw new AppError("Invalid JSON format in 'equipment'", 400);
-        }
+    // التحقق من وجود الـ Workout
+    const workoutExists = await Workout.findById(workout);
+    if (!workoutExists) {
+        throw new AppError("Workout not found", 404);
     }
 
     let imageUrl = null;
 
+    // رفع الصورة إلى Cloudinary
     if (req.file) {
         imageUrl = await uploadToCloudinary(req.file.buffer, "exercises/images");
     }

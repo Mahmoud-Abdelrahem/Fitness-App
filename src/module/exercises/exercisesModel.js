@@ -4,7 +4,7 @@ const exerciseSchema = new mongoose.Schema(
     {
         workout: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "WorkoutTracker",
+            ref: "Workout",
             required: true,
         },
         title: {
@@ -12,15 +12,15 @@ const exerciseSchema = new mongoose.Schema(
             required: true,
         },
         duration: {
-            type: Number, 
+            type: Number,
             required: true,
         },
         repetitions: {
-            type: Number, 
+            type: Number,
             required: false,
         },
         image: {
-            type: String, 
+            type: String,
             required: false,
         },
         equipment: [
@@ -30,7 +30,7 @@ const exerciseSchema = new mongoose.Schema(
                     required: true,
                 },
                 image: {
-                    type: String, 
+                    type: String,
                     required: false,
                 },
             },
@@ -41,12 +41,12 @@ const exerciseSchema = new mongoose.Schema(
             required: true,
         },
         caloriesBurned: {
-            type: Number, 
+            type: Number,
             required: true,
         },
     },
     {
-        timestamps: true, 
+        timestamps: true,
     }
 );
 
