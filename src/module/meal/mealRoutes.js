@@ -10,7 +10,7 @@ router.post(
     "/",
     auth.protect,
     upload.single("image"),
-    parseJsonFields(["nutrition", "dailyMeals", "suggestedCategories"]), 
+    parseJsonFields(["nutrition", "dailyMeals", "suggestedCategories"]),
     mealController.createMeal
 );
 
@@ -22,7 +22,7 @@ router.patch(
     "/:mealId",
     auth.protect,
     upload.single("image"),
-    parseJsonFields(["nutrition", "dailyMeals", "suggestedCategories"]), 
+    parseJsonFields(["nutrition", "dailyMeals", "suggestedCategories"]),
     mealController.updateMeal
 );
 

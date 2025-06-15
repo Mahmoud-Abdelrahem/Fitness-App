@@ -1,10 +1,21 @@
 import asyncHandler from "express-async-handler";
 import Meal from "./mealModel.js";
+import MainCategory from "../mealDetails/mealDetailsModel.js";
 import AppError from "../../utils/AppError.js";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary.js";
 
 export const createMeal = asyncHandler(async (req, res) => {
     const { nutrition, dailyMeals, suggestedCategories } = req.body;
+
+    // التحقق من أن جميع mainCategoryId صالحة
+    if (suggestedCategories) {
+        for (const category of suggestedCategories) {
+            const mainCategoryExists = await MainCategory.findById(category.mainCategory);
+            if (!mainCategoryExists) {
+                throw new AppError(`MainCategory with ID ${category.mainCategory} not found`, 404);
+            }
+        }
+    }
 
     let imageUrl = null;
 
@@ -51,6 +62,16 @@ export const getMealById = asyncHandler(async (req, res) => {
 export const updateMeal = asyncHandler(async (req, res) => {
     const { mealId } = req.params;
     const { nutrition, dailyMeals, suggestedCategories } = req.body;
+
+    // التحقق من أن جميع mainCategoryId صالحة
+    if (suggestedCategories) {
+        for (const category of suggestedCategories) {
+            const mainCategoryExists = await MainCategory.findById(category.mainCategory);
+            if (!mainCategoryExists) {
+                throw new AppError(`MainCategory with ID ${category.mainCategory} not found`, 404);
+            }
+        }
+    }
 
     let imageUrl = null;
 
